@@ -165,10 +165,6 @@
     // Create an empty scene
     var scene = new THREE.Scene();
 
-    // Create a basic perspective camera
-    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
-    camera.position.z = 4;
-
 
     // Create a renderer with Antialiasing
     var renderer = new THREE.WebGLRenderer({antialias:true});
@@ -181,11 +177,23 @@
     renderer.setClearColor("#000000");
     container.appendChild(renderer.domElement);
 
+    console.log("Renderer below "); // TODO: delete after testing
+    console.log(renderer);
+
+
+    // Create a basic perspective camera
+    var camera = new THREE.PerspectiveCamera( 75, w/h, 0.1, 1000 );
+    camera.position.z = 4;
+
 
     // Resizes the animation canvas when the window is resized
     window.addEventListener('resize', function () {
         var container = document.getElementById('canvas1');
         var positionInfo = container.getBoundingClientRect();
+
+        //console.log(positionInfo); // TODO: delete after testing
+        console.log(renderer); // TODO: delete after testing
+
         var h = positionInfo.height*.99;
         var w = positionInfo.width;
         renderer.setSize(w, h);
@@ -202,11 +210,22 @@
     scene.add( cube );
 
     // Render Loop
+    var direction = 1;
+
+
+    console.log(scene);
+
     var render = function () {
       requestAnimationFrame( render );
 
+
       cube.rotation.x += 0.01;
       cube.rotation.y += 0.01;
+
+      //cube.position.z += .05;
+
+      //console.log(cube);
+      //console.log(cube); // TODO: delete after testing
 
       // Render the scene
       renderer.render(scene, camera);
