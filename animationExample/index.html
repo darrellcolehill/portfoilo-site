@@ -1,34 +1,24 @@
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Three.js 101</title>
-  <!--  Simple reset to delete the margins  -->
-  <style>
-    body { margin: 0; }
-    
-    #canvas1 {
-             background-color: #FFF;
-             
-             width: 100%;
-             height:50%;
-             
-             border: 1px solid black;
-              }
-  </style>
+<!doctype html>
+<html>
+  <head>
+    <script src="https://pixijs.download/release/pixi.min.js"></script>
+  </head>
+  <body>
+    <script>
+      // Create the application helper and add its render target to the page
+      let app = new PIXI.Application({ width: 640, height: 360, backgroundColor: 0x1099bb });
+      document.body.appendChild(app.view);
 
-  <!--  Three.js CDN  -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r83/three.min.js"></script>
+      // Create the sprite and add it to the stage
+      let sprite = PIXI.Sprite.from('sample.png');
+      app.stage.addChild(sprite);
 
-</head>
-<body>
-  <!--  Our code  -->
-
-  <div id="canvas1">
-    <h1 style="color:red; position: absolute;">Hello</h1>
-  </div>
-
-  <script src="main.js"></script>
-
-
-</body>
+      // Add a ticker callback to move the sprite back and forth
+      let elapsed = 0.0;
+      app.ticker.add((delta) => {
+        elapsed += delta;
+        sprite.x = 100.0 + Math.cos(elapsed/50.0) * 100.0;
+      });
+    </script>
+  </body>
 </html>
